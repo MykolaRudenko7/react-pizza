@@ -16,19 +16,21 @@ function App() {
       <div className="content">
         <div className="container">
           <div className="content__top">
-            <Categories />
+            {/* <Categories /> */}
             <Sort />
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
             {pizzas.map((obj) => (
-              <PizzaBlock {...obj}
-				   /* або */
-               //  title={obj.title}
-               //  price={obj.price}
-               //  image={obj.imageUrl}
-               //  sizes={obj.sizes}
-               //  types={obj.types}
+              <PizzaBlock
+				  key={obj.id}
+                {...obj}
+                /* або */
+                //  title={obj.title}
+                //  price={obj.price}
+                //  image={obj.imageUrl}
+                //  sizes={obj.sizes}
+                //  types={obj.types}
               />
             ))}
           </div>

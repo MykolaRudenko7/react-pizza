@@ -14,14 +14,20 @@ function PizzaBlock({ title, price, imageUrl, sizes, types }) {
       <div className="pizza-block__selector">
         <ul>
           {types.map((type, i) => (
-            <li onClick={() => setActiveType(i)} className={activeType === type ? 'active' : ''}>
+            <li
+              key={i}
+              onClick={() => setActiveType(i)}
+              className={activeType === type ? 'active' : ''}>
               {nameTypes[type]}
             </li>
           ))}
         </ul>
         <ul>
           {sizes.map((size, i) => (
-            <li onClick={() => setActiveSize(i)} className={activeSize === i ? 'active' : ''}>
+            <li
+              key={i}
+              onClick={() => setActiveSize(i)}
+              className={activeSize === i ? 'active' : ''}>
               {size} см
             </li>
           ))}
