@@ -3,7 +3,7 @@ import React from 'react';
 function Categories() {
   const [activeIndex, setActiveIndex] = React.useState(0);
 
-  const categories = ['Все', "М'ясні", 'Веганські', 'Гриль', 'Пекучі', 'Закриті'];
+  const categories = ['Всі', "М'ясні", 'Веганські', 'Гриль', 'Пекучі', 'Закриті'];
 
   const onClickCategory = (i) => {
     setActiveIndex(i);

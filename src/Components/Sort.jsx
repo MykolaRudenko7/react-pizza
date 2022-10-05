@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Sort() {
-  //
+  // state
   const [openPopup, setOpenPopup] = React.useState(false);
   const [selected, setSelected] = React.useState(0);
   //
