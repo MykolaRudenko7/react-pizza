@@ -5,8 +5,8 @@ function Categories() {
 
   const categories = ['Всі', "М'ясні", 'Веганські', 'Гриль', 'Пекучі', 'Закриті'];
 
-  const onClickCategory = (i) => {
-    setActiveIndex(i);
+  const onClickCategory = (index) => {
+    setActiveIndex(index);
   };
 
   return (
