@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 //Components
 import Categories from '../Components/Categories';
 import Sort from '../Components/Sort';
@@ -18,10 +20,11 @@ const MainPage = () => {
         setItems(pizzasJson);
         setIfLoading(!ifLoading);
       });
+    window.scrollTo(0, 0);
   }, []);
 
   return (
-    <>
+    <div className="container">
       <div className="content__top">
         <Categories />
         <Sort />
@@ -32,7 +35,7 @@ const MainPage = () => {
           ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
           : items.map((item) => <PizzaBlock key={item.id} {...item} />)}
       </div>
-    </>
+    </div>
   );
 };
 
