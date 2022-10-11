@@ -1,0 +1,27 @@
+.paginate {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	li {
+		cursor: pointer;
+		background-color: #f3f3f3;
+		margin: 0 10px;
+		font-weight: 600;
+		padding: 7px 15px;
+		border-radius: 5px;
+
+		&:hover {
+			background-color: #e4e2e2;
+		}
+	}
+}
+
+:global {
+	.selected {
+		a {
+			color: #fe5f1e;
+			font-weight: 800;
+		}
+	}
+}
