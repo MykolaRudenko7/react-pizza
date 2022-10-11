@@ -1,13 +1,15 @@
 import React from 'react';
-
 //Components
 import Categories from '../Components/Categories';
 import Sort from '../Components/Sort';
 import PizzaBlock from '../Components/PizzaBlock/index';
 import Skeleton from '../Components/PizzaBlock/Skeleton';
 import Paginate from '../Pagination/index';
+//
+import { SearchContext } from '../App';
 
-const MainPage = ({ searchValue }) => {
+const MainPage = () => {
+  const { searchValue } = React.useContext(SearchContext);
   // states
   // Піци
   const [items, setItems] = React.useState([]);

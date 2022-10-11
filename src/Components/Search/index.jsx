@@ -1,8 +1,14 @@
 import React from 'react';
 //
+import { SearchContext } from '../../App.js';
+//
 import styles from './Search.module.scss';
 import close from '../../../src/assets/img/fhgjfvg.svg';
-const Search = ({ searchValue, setSearchValue }) => {
+
+const Search = () => {
+
+  const { searchValue, setSearchValue } = React.useContext(SearchContext);
+
   return (
     <div className={styles.wrapper}>
       <svg
@@ -25,7 +31,12 @@ const Search = ({ searchValue, setSearchValue }) => {
         placeholder="Пошук піцци"
       />
       {searchValue && (
-        <img className={styles.clean} src={close} onClick={() => setSearchValue('')} alt='clean button'/>
+        <img
+          className={styles.clean}
+          src={close}
+          onClick={() => setSearchValue('')}
+          alt="clean button"
+        />
       )}
     </div>
   );
