@@ -1,19 +1,26 @@
 import React from 'react';
+// redax
+import { useSelector, useDispatch } from 'react-redux';
+import { setSortType } from '../redux/slices/filterSlice';
 
-function Sort({ value, clickOnSort }) {
+function Sort() {
+  // redux
+  const dispatch = useDispatch();
+  const sortType = useSelector((state) => state.filter.sortType);
+
   const [openPopup, setOpenPopup] = React.useState(false);
 
   const list = [
-    { name: 'популярності(спадання)', sortProp: 'rating' },
+    { name: 'популярності (спадання)', sortProp: 'rating' },
     { name: 'популярності (зростання)', sortProp: '-rating' },
-    { name: 'ціною(спаданням)', sortProp: 'price' },
-    { name: 'ціною(зростання)', sortProp: '-price' },
-    { name: 'алфавітом(спадання)', sortProp: 'title' },
-    { name: 'алфавітом(зростання)', sortProp: '-title' },
+    { name: 'ціною (спаданням)', sortProp: 'price' },
+    { name: 'ціною (зростання)', sortProp: '-price' },
+    { name: 'алфавітом (спадання)', sortProp: 'title' },
+    { name: 'алфавітом (зростання)', sortProp: '-title' },
   ];
 
-  const onClickListItem = (index) => {
-    clickOnSort(index);
+  const onClickListItem = (obj) => {
+    dispatch(setSortType(obj));
     setOpenPopup(false);
   };
 
@@ -33,18 +40,18 @@ function Sort({ value, clickOnSort }) {
           />
         </svg>
         <b>Сортувати за:</b>
-        <span onClick={() => setOpenPopup(!openPopup)}>{value.name}</span>
+        <span onClick={() => setOpenPopup(!openPopup)}>{sortType.name}</span>
       </div>
       {openPopup && (
         <div className="sort__popup">
           <ul>
-            {list.map((elementList, index) => (
+            {list.map((obj, index) => (
               <li
                 key={index}
-                className={value.sortProp === elementList.sortProp ? 'active' : ''}
-                onClick={() => onClickListItem(elementList)}
+                className={sortType.sortProp === obj.sortProp ? 'active' : ''}
+                onClick={() => onClickListItem(obj)}
               >
-                {elementList.name}
+                {obj.name}
               </li>
             ))}
           </ul>

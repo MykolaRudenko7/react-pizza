@@ -7,21 +7,28 @@ import Skeleton from '../Components/PizzaBlock/Skeleton';
 import Paginate from '../Pagination/index';
 //
 import { SearchContext } from '../App';
+// redax
+import { useSelector, useDispatch } from 'react-redux';
+import { setCategoryIndex, setSortType } from '../redux/slices/filterSlice';
 
 const MainPage = () => {
-  const { searchValue } = React.useContext(SearchContext);
-  // states
-  // Піци
-  const [items, setItems] = React.useState([]);
+  // redax
+  const { categoryIndex, sortType } = useSelector((state) => state.filter);
 
+  const dispatch = useDispatch();
+  const clickOnCategoty = (index) => {
+    dispatch(setCategoryIndex(index));
+  };
+
+  // states
+  const { searchValue } = React.useContext(SearchContext);
+  const [items, setItems] = React.useState([]); // pizzas
   const [ifLoading, setIfLoading] = React.useState(true);
-  const [categoryIndex, setCategoryIndex] = React.useState(0);
-  const [sortType, setSortType] = React.useState({ name: 'популярності', sortProp: 'rating' });
   const [page, setPage] = React.useState(1);
-  // back-end
+
+  //back-end
   React.useEffect(() => {
     setIfLoading(true);
-
     const sortBy = sortType.sortProp.replace('-', '');
     const sortOrd = sortType.sortProp.includes('-') ? 'asc' : 'desc';
     const category = categoryIndex > 0 ? `category=${categoryIndex}` : '';
@@ -36,7 +43,7 @@ const MainPage = () => {
         setIfLoading((ifLoading) => !ifLoading);
       });
     window.scrollTo(0, 0);
-  }, [categoryIndex, sortType, searchValue, page]);
+  }, [categoryIndex, sortType.sortProp, searchValue, page]);
 
   // Піци для рендеру
   const pizzas = items.map((item) => <PizzaBlock key={item.id} {...item} />);
@@ -54,8 +61,8 @@ const MainPage = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryIndex} clickOnCategoty={(index) => setCategoryIndex(index)} />
-        <Sort value={sortType} clickOnSort={(index) => setSortType(index)} />
+        <Categories value={categoryIndex} clickOnCategoty={(index) => clickOnCategoty(index)} />
+        <Sort />
       </div>
       <h2 className="content__title">Всі піцци</h2>
       <div className="content__items">{ifLoading ? skeletons : pizzas}</div>

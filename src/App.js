@@ -6,6 +6,7 @@ import Header from './Components/Header';
 import MainPage from './Pages/MainPage';
 import NotFound from './Pages/NotFoundPage';
 import BasketPage from './Pages/BasketPage';
+//  redux
 
 // Style
 import './scss/app.scss';
