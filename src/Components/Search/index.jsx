@@ -12,25 +12,28 @@ const Search = () => {
   //
   const [localValueInput, setLocalValueInput] = React.useState();
 
+  const inputRef = React.useRef();
+
   // clear
   const onClickClear = () => {
     setSearchValue('');
     setLocalValueInput('');
+    inputRef.current.focus();
   };
 
-//   запис значення
+  //   запис значення
   const onChangeValueInput = (e) => {
     setLocalValueInput(e.target.value);
-	 delaySendValue(e.target.value);
+    delaySendValue(e.target.value);
   };
 
-//   затримкка запросу на сервер
-    const delaySendValue= React.useCallback(
-      debounce((value) => {
-        setSearchValue(value);
-      }, 1000),
-      [],
-    );
+  //   затримкка запросу на сервер
+  const delaySendValue = React.useCallback(
+    debounce((value) => {
+      setSearchValue(value);
+    }, 1000),
+    [],
+  );
 
   return (
     <div className={styles.wrapper}>
@@ -48,6 +51,7 @@ const Search = () => {
         />
       </svg>
       <input
+        ref={inputRef}
         value={localValueInput}
         onChange={(e) => onChangeValueInput(e)}
         className={styles.input}
