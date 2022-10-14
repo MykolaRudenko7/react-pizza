@@ -1,4 +1,5 @@
 import React from 'react';
+import debounce from 'lodash.debounce';
 //
 import { SearchContext } from '../../App.js';
 //
@@ -6,8 +7,30 @@ import styles from './Search.module.scss';
 import close from '../../../src/assets/img/fhgjfvg.svg';
 
 const Search = () => {
-
+  // state input for server
   const { searchValue, setSearchValue } = React.useContext(SearchContext);
+  //
+  const [localValueInput, setLocalValueInput] = React.useState();
+
+  // clear
+  const onClickClear = () => {
+    setSearchValue('');
+    setLocalValueInput('');
+  };
+
+//   запис значення
+  const onChangeValueInput = (e) => {
+    setLocalValueInput(e.target.value);
+	 delaySendValue(e.target.value);
+  };
+
+//   затримкка запросу на сервер
+    const delaySendValue= React.useCallback(
+      debounce((value) => {
+        setSearchValue(value);
+      }, 1000),
+      [],
+    );
 
   return (
     <div className={styles.wrapper}>
@@ -25,16 +48,16 @@ const Search = () => {
         />
       </svg>
       <input
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        value={localValueInput}
+        onChange={(e) => onChangeValueInput(e)}
         className={styles.input}
         placeholder="Пошук піцци"
       />
-      {searchValue && (
+      {localValueInput && (
         <img
           className={styles.clean}
           src={close}
-          onClick={() => setSearchValue('')}
+          onClick={() => onClickClear()}
           alt="clean button"
         />
       )}
