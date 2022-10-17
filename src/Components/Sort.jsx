@@ -3,21 +3,21 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSortType } from '../redux/slices/filterSlice';
 
+export const list = [
+  { name: 'популярності (спадання)', sortProp: 'rating' },
+  { name: 'популярності (зростання)', sortProp: '-rating' },
+  { name: 'ціною (спаданням)', sortProp: 'price' },
+  { name: 'ціною (зростання)', sortProp: '-price' },
+  { name: 'алфавітом (спадання)', sortProp: 'title' },
+  { name: 'алфавітом (зростання)', sortProp: '-title' },
+];
+
 function Sort() {
   // redux
   const dispatch = useDispatch();
   const sortType = useSelector((state) => state.filter.sortType);
 
   const [openPopup, setOpenPopup] = React.useState(false);
-
-  const list = [
-    { name: 'популярності (спадання)', sortProp: 'rating' },
-    { name: 'популярності (зростання)', sortProp: '-rating' },
-    { name: 'ціною (спаданням)', sortProp: 'price' },
-    { name: 'ціною (зростання)', sortProp: '-price' },
-    { name: 'алфавітом (спадання)', sortProp: 'title' },
-    { name: 'алфавітом (зростання)', sortProp: '-title' },
-  ];
 
   const onClickListItem = (obj) => {
     dispatch(setSortType(obj));
