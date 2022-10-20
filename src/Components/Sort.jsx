@@ -12,11 +12,10 @@ export const list = [
   { name: 'алфавітом (зростання)', sortProp: '-title' },
 ];
 
-function Sort() {
-  // redux
+export const Sort = React.memo(({ value }) => {
   const dispatch = useDispatch();
+  const sortRef = React.useRef(null);
   const sortType = useSelector((state) => state.filter.sortType);
-
   const [openPopup, setOpenPopup] = React.useState(false);
 
   const onClickListItem = (obj) => {
@@ -24,8 +23,22 @@ function Sort() {
     setOpenPopup(false);
   };
 
+  //   клік на сорт і поза ним
+  React.useEffect(() => {
+    const onClickSort = (e) => {
+      if (!e.composedPath().includes(sortRef.current)) {
+        setOpenPopup(false);
+      }
+    };
+    document.body.addEventListener('click', onClickSort);
+
+    return () => {
+      document.body.removeEventListener('click', onClickSort);
+    };
+  }, []);
+
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           width="10"
@@ -59,6 +72,6 @@ function Sort() {
       )}
     </div>
   );
-}
+});
 
 export default Sort;

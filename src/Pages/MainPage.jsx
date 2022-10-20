@@ -3,14 +3,13 @@ import React from 'react';
 import axios from 'axios';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-// Redax
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setCategoryIndex,
   setSortType,
   setCurrentPage,
   setFilters,
-} from '../redux/slices/filterSlice';
+} from '../redux/slices/filterSlice.js';
 
 // Components
 import Categories from '../Components/Categories';
@@ -19,7 +18,6 @@ import PizzaBlock from '../Components/PizzaBlock/index';
 import Skeleton from '../Components/PizzaBlock/Skeleton';
 import Paginate from '../Pagination/index';
 import { list } from '../Components/Sort';
-// Context
 import { SearchContext } from '../App';
 //
 //
@@ -27,32 +25,29 @@ import { SearchContext } from '../App';
 //
 //
 const MainPage = () => {
-  //   states
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const isSearch = React.useRef(false);
+  const isFirstRender = React.useRef(false);
+
+  const { categoryIndex, sortType, currentPage } = useSelector((state) => state.filter);
   const { searchValue } = React.useContext(SearchContext);
+
   const [items, setItems] = React.useState([]); // pizzas
   const [ifLoading, setIfLoading] = React.useState(true);
 
-  const navigate = useNavigate();
-  const { categoryIndex, sortType, currentPage } = useSelector((state) => state.filter);
-  const dispatch = useDispatch();
-
-  const clickOnCategoty = (index) => {
+  const clickOnCategoty = React.useCallback((index) => {
     dispatch(setCategoryIndex(index));
-  };
-  const onChangePages = (pageNum) => {
-    dispatch(setCurrentPage(pageNum));
+  }, []);
+
+  const onChangePage = (pageNumber) => {
+    dispatch(setCurrentPage(pageNumber));
   };
 
-  //   4
-  // чи з юрл
-  const isSearch = React.useRef(false);
-  //   перший рендер
-  const isFirstRender = React.useRef(false);
-
-  //   3
-  //   отримую піцци
   const fetchPizzas = () => {
     setIfLoading(true);
+
     const sortBy = sortType.sortProp.replace('-', '');
     const sortOrd = sortType.sortProp.includes('-') ? 'asc' : 'desc';
     const category = categoryIndex > 0 ? `category=${categoryIndex}` : '';
@@ -68,8 +63,7 @@ const MainPage = () => {
       });
   };
 
-  //  2 якщо при прешому рендері, то не треба вшивать в строку параметри, якщо далі, треба
-  //   і якщо змін параметри і був перший рендер відбув наступне
+  //   Якщо відбувся перший рендер і змінили параметри (роблю строку і в URL)
   React.useEffect(() => {
     if (isFirstRender.current) {
       const queryString = qs.stringify({
@@ -82,24 +76,24 @@ const MainPage = () => {
     isFirstRender.current = true;
   }, [currentPage, categoryIndex, sortType.sortProp]);
 
-  //  1 Якщо був 1й рендер то перевіряю юрл параметри і зберігаю в редаксі
+  //   якщо запит з URL, зберігаю в Redux
   React.useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-      const sort = list.find((obj) => obj.sortProp === params.sortProp);
-      dispatch(setFilters({ ...params, sort }));
-
+      const sortProp = list.find((obj) => obj.sortProp === params.sortProp);
+      dispatch(
+        setFilters({
+          ...params,
+          sortProp,
+        }),
+      );
       isSearch.current = true;
     }
   }, []);
 
-  // чи потрібно робити запрос на зміну піц
-  // якщо з юрл то нічого не робить
-  // якщо не з юрл то запрашую піцци
-  //   при першому рендері піци запрашуються
+  // якщо 1й рендер, даю запит на піци
   React.useEffect(() => {
     window.scrollTo(0, 0);
-    //  якщо
     if (!isSearch.current) {
       fetchPizzas();
     }
@@ -119,7 +113,7 @@ const MainPage = () => {
       </div>
       <h2 className="content__title">Всі піцци</h2>
       <div className="content__items">{ifLoading ? skeletons : pizzas}</div>
-      <Paginate currentPage={currentPage} onChange={(pageNum) => onChangePages(pageNum)} />
+      <Paginate currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );
 };
