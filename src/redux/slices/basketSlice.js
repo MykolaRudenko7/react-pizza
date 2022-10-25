@@ -56,7 +56,10 @@ export const basketSlice = createSlice({
   },
 });
 
-// експортую властивість константою
-export const { addPizza, minusPizza, removePizzas, clearBasket } = basketSlice.actions;
+export const basketSelector = (state) => state.basket;
 
+export const getItemsByIdSelector = (id) => (state) =>
+  state.basket.pizzasInBasket.find((obj) => obj.id === id);
+
+export const { addPizza, minusPizza, removePizzas, clearBasket } = basketSlice.actions;
 export default basketSlice.reducer;

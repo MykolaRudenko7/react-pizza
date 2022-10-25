@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import BasketItem from '../Components/BasketItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearBasket } from '../redux/slices/basketSlice';
+import { basketSelector } from '../redux/slices/basketSlice';
+
 import BasketEmpty from '../Components/BasketEmpty';
 
 const BasketPage = () => {
-  const { pizzasInBasket, totalPrice } = useSelector((state) => state.basket);
-
+  const { pizzasInBasket, totalPrice } = useSelector(basketSelector);
+  
   const totalCount = pizzasInBasket.reduce((sum, obj) => {
     return obj.count + sum;
   }, 0);

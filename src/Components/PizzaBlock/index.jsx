@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addPizza } from '../../redux/slices/basketSlice';
+import { getItemsByIdSelector, addPizza } from '../../redux/slices/basketSlice';
 
 function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
   const [activeType, setActiveType] = React.useState(0);
@@ -9,7 +9,7 @@ function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
 
   const dispatch = useDispatch();
 
-  const items = useSelector((state) => state.basket.pizzasInBasket.find((obj) => obj.id === id));
+  const items = useSelector(getItemsByIdSelector(id));
   const showCount = items ? items.count : '';
 
   const onClickAddPizza = () => {

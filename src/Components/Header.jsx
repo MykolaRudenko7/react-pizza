@@ -1,11 +1,16 @@
-import Search from './Search/index';
 import { Link } from 'react-router-dom';
-import logoSvg from '../assets/img/pizza-logo.svg';
 import { useSelector } from 'react-redux';
 
+import Search from './Search/index';
+import { basketSelector } from '../redux/slices/basketSlice';
+
+import logoSvg from '../assets/img/pizza-logo.svg';
+
+
+
 function Header() {
-  const { pizzasInBasket, totalPrice } = useSelector((state) => state.basket);
-  
+  const { pizzasInBasket, totalPrice } = useSelector(basketSelector);
+
   const totalCount = pizzasInBasket.reduce((sum, obj) => {
     return obj.count + sum;
   }, 0);

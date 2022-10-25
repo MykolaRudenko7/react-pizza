@@ -9,8 +9,9 @@ import {
   setSortType,
   setCurrentPage,
   setFilters,
+  filterSelector,
 } from '../redux/slices/filterSlice.js';
-import { fetchPizzas } from '../redux/slices/pizzasSlice';
+import { fetchPizzas, pizzasSelector } from '../redux/slices/pizzasSlice';
 // Components
 import Categories from '../Components/Categories';
 import Sort from '../Components/Sort';
@@ -31,10 +32,9 @@ const MainPage = () => {
   const isSearch = React.useRef(false);
   const isFirstRender = React.useRef(false);
 
-  const { categoryIndex, sortType, currentPage } = useSelector((state) => state.filter);
+  const { categoryIndex, sortType, currentPage, searchValue } = useSelector(filterSelector);
+  const { items, status } = useSelector(pizzasSelector); // pizzas and status laoding
 
-  const { items, status } = useSelector((state) => state.pizzas); // pizzas and status laoding
-  const { searchValue } = React.useContext(SearchContext);
 
   const clickOnCategoty = React.useCallback((index) => {
     dispatch(setCategoryIndex(index));

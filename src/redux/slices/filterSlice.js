@@ -17,6 +17,9 @@ export const filterSlice = createSlice({
   initialState,
   //  працівники
   reducers: {
+    setSearchValue(state, action) {
+      state.searchValue = action.payload;
+    },
     setCategoryIndex(state, action) {
       state.categoryIndex = action.payload;
     },
@@ -34,7 +37,8 @@ export const filterSlice = createSlice({
   },
 });
 
-// експортую властивість константою
-export const { setCategoryIndex, setSortType, setCurrentPage, setFilters } = filterSlice.actions;
-
+export const filterSelector = (state) => state.filter;
+export const sortTypeSelector = (state) => state.filter.sortType;
+export const { setCategoryIndex, setSortType, setCurrentPage, setFilters, setSearchValue } =
+  filterSlice.actions;
 export default filterSlice.reducer;

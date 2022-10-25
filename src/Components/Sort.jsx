@@ -1,7 +1,7 @@
 import React from 'react';
 // redax
 import { useSelector, useDispatch } from 'react-redux';
-import { setSortType } from '../redux/slices/filterSlice';
+import { sortTypeSelector, setSortType } from '../redux/slices/filterSlice';
 
 export const list = [
   { name: 'популярності (спадання)', sortProp: 'rating' },
@@ -15,7 +15,9 @@ export const list = [
 export const Sort = React.memo(({ value }) => {
   const dispatch = useDispatch();
   const sortRef = React.useRef(null);
-  const sortType = useSelector((state) => state.filter.sortType);
+
+  const sortType = useSelector(sortTypeSelector);
+
   const [openPopup, setOpenPopup] = React.useState(false);
 
   const onClickListItem = (obj) => {

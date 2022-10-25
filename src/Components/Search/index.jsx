@@ -1,22 +1,25 @@
 import React from 'react';
 import debounce from 'lodash.debounce';
 //
+import { useDispatch } from 'react-redux';
+import { setSearchValue } from '../../redux/slices/filterSlice';
+
+//
 import { SearchContext } from '../../App.js';
 //
 import styles from './Search.module.scss';
 import close from '../../../src/assets/img/fhgjfvg.svg';
 
 const Search = () => {
-  // state input for server
-  const { searchValue, setSearchValue } = React.useContext(SearchContext);
-  //
-  const [localValueInput, setLocalValueInput] = React.useState();
+  const dispatch = useDispatch();
 
+  // state input for server
+  const [localValueInput, setLocalValueInput] = React.useState('');
   const inputRef = React.useRef();
 
   // clear
   const onClickClear = () => {
-    setSearchValue('');
+    dispatch(setSearchValue());
     setLocalValueInput('');
     inputRef.current.focus();
   };
@@ -30,7 +33,7 @@ const Search = () => {
   //   затримкка запросу на сервер
   const delaySendValue = React.useCallback(
     debounce((value) => {
-      setSearchValue(value);
+      dispatch(setSearchValue(value));
     }, 1000),
     [],
   );
