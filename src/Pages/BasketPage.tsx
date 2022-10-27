@@ -1,20 +1,19 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import BasketItem from '../Components/BasketItem';
-import { useSelector, useDispatch } from 'react-redux';
-import { clearBasket } from '../redux/slices/basketSlice';
-import { basketSelector } from '../redux/slices/basketSlice';
+import { basketSelector, clearBasket } from '../redux/slices/basketSlice';
 
 import BasketEmpty from '../Components/BasketEmpty';
 
-const BasketPage = () => {
+const BasketPage: React.FC = () => {
   const { pizzasInBasket, totalPrice } = useSelector(basketSelector);
-  
-  const totalCount = pizzasInBasket.reduce((sum, obj) => {
+
+  const totalCount = pizzasInBasket.reduce((sum:number, obj:any) => {
     return obj.count + sum;
   }, 0);
 
-  const elements = useSelector((state) => state.basket.pizzasInBasket);
+  const elements = useSelector((state:any) => state.basket.pizzasInBasket);
   const dispatch = useDispatch();
   const onClickClear = () => {
     dispatch(clearBasket());
@@ -102,7 +101,7 @@ const BasketPage = () => {
           </div>
         </div>
         <div className="content__items">
-          {elements.map((obj) => (
+          {elements.map((obj:any) => (
             <BasketItem key={obj.id} {...obj} />
           ))}
         </div>

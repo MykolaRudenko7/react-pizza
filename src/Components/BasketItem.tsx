@@ -2,8 +2,28 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 //
 import { addPizza, minusPizza, removePizzas } from '../redux/slices/basketSlice';
+//
+//
+//
+type BasketItemCategory = {
+  id: string;
+  title: string;
+  type: string;
+  size: number;
+  price: number;
+  count: number;
+  imageUrl: string;
+};
 
-const BasketItem = ({ id, title, type, size, price, count, imageUrl }) => {
+const BasketItem: React.FC<BasketItemCategory> = ({
+  id,
+  title,
+  type,
+  size,
+  price,
+  count,
+  imageUrl,
+}) => {
   const dispatch = useDispatch();
   // кнопки
   const onClickPlus = () => {

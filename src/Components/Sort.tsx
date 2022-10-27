@@ -1,9 +1,16 @@
 import React from 'react';
 // redax
-import { useSelector, useDispatch } from 'react-redux';
-import { sortTypeSelector, setSortType } from '../redux/slices/filterSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSortType, sortTypeSelector } from '../redux/slices/filterSlice';
+//
+//
+//
+type SortItem = {
+  name: string;
+  sortProp: string;
+};
 
-export const list = [
+export const list: SortItem[] = [
   { name: 'популярності (спадання)', sortProp: 'rating' },
   { name: 'популярності (зростання)', sortProp: '-rating' },
   { name: 'ціною (спаданням)', sortProp: 'price' },
@@ -12,22 +19,21 @@ export const list = [
   { name: 'алфавітом (зростання)', sortProp: '-title' },
 ];
 
-export const Sort = React.memo(({ value }) => {
+const Sort: React.FC = () => {
   const dispatch = useDispatch();
-  const sortRef = React.useRef(null);
 
   const sortType = useSelector(sortTypeSelector);
-
+  const sortRef = React.useRef<HTMLDivElement>(null);
   const [openPopup, setOpenPopup] = React.useState(false);
 
-  const onClickListItem = (obj) => {
+  const onClickListItem = (obj: SortItem) => {
     dispatch(setSortType(obj));
     setOpenPopup(false);
   };
 
   //   клік на сорт і поза ним
   React.useEffect(() => {
-    const onClickSort = (e) => {
+    const onClickSort = (e: any) => {
       if (!e.composedPath().includes(sortRef.current)) {
         setOpenPopup(false);
       }
@@ -74,6 +80,6 @@ export const Sort = React.memo(({ value }) => {
       )}
     </div>
   );
-});
+};
 
 export default Sort;

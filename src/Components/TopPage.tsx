@@ -1,9 +1,11 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 //
-import Header from '../Components/Header';
-
-const TopPage = () => {
+import Header from './Header';
+//
+//
+// 
+const TopPage:React.FC = () => {
   return (
     <div className="wrapper">
       <Header />

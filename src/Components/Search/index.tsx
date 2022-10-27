@@ -6,23 +6,33 @@ import { setSearchValue } from '../../redux/slices/filterSlice';
 //
 import close from '../../../src/assets/img/fhgjfvg.svg';
 import styles from './Search.module.scss';
-
-const Search = () => {
+//
+//
+//
+const Search: React.FC = () => {
   const dispatch = useDispatch();
 
   // state input for server
   const [localValueInput, setLocalValueInput] = React.useState('');
-  const inputRef = React.useRef();
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   // clear
   const onClickClear = () => {
-    dispatch(setSearchValue());
+    dispatch(setSearchValue(''));
     setLocalValueInput('');
-    inputRef.current.focus();
+    // inputRef.current.focus();
+    // 1
+    // якщо він є (позитивне значення), то фокус
+    // if (inputRef.current) {
+    //   inputRef.current.focus();
+    // }
+    // 2
+    // якщо є параметр current, то focus() (опціональна послідуваність)
+    inputRef.current?.focus();
   };
 
   //   запис значення
-  const onChangeValueInput = (e) => {
+  const onChangeValueInput = (e:any) => {
     setLocalValueInput(e.target.value);
     delaySendValue(e.target.value);
   };

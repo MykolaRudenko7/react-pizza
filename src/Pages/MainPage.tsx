@@ -1,29 +1,27 @@
 // Library
-import React from 'react';
 import qs from 'qs';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 // redux
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-  setCategoryIndex,
+  filterSelector, setCategoryIndex,
   setCurrentPage,
-  setFilters,
-  filterSelector,
+  setFilters
 } from '../redux/slices/filterSlice.js';
 import { fetchPizzas, pizzasSelector } from '../redux/slices/pizzasSlice';
 // Components
 import Categories from '../Components/Categories';
-import Sort from '../Components/Sort';
 import PizzaBlock from '../Components/PizzaBlock/index';
 import Skeleton from '../Components/PizzaBlock/Skeleton';
+import Sort, { list } from '../Components/Sort';
 import Paginate from '../Pagination/index';
-import { list } from '../Components/Sort';
 //
 //
 //
 //
 //
-const MainPage = () => {
+const MainPage:React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -33,11 +31,11 @@ const MainPage = () => {
   const { categoryIndex, sortType, currentPage, searchValue } = useSelector(filterSelector);
   const { items, status } = useSelector(pizzasSelector); // pizzas and status laoding
 
-  const clickOnCategoty = React.useCallback((index) => {
+  const clickOnCategoty = React.useCallback((index:number) => {
     dispatch(setCategoryIndex(index));
   }, []);
 
-  const onChangePage = (pageNumber) => {
+  const onChangePage = (pageNumber:number) => {
     dispatch(setCurrentPage(pageNumber));
   };
 
@@ -48,6 +46,7 @@ const MainPage = () => {
     const search = searchValue ? `&search=${searchValue}` : '';
 
     dispatch(
+      // @ts-ignore
       fetchPizzas({
         sortBy,
         sortOrd,
@@ -96,7 +95,7 @@ const MainPage = () => {
     isSearch.current = false;
   }, [categoryIndex, sortType.sortProp, searchValue, currentPage]);
   // піци для рендеру
-  const pizzas = items.map((item) => (
+  const pizzas = items.map((item:any) => (
     <Link to={`/pizza/${item.id}`} key={item.id}>
       <PizzaBlock {...item} />
     </Link>
@@ -107,7 +106,7 @@ const MainPage = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryIndex} clickOnCategoty={(index) => clickOnCategoty(index)} />
+        <Categories value={categoryIndex} clickOnCategoty={(index:number) => clickOnCategoty(index)} />
         <Sort />
       </div>
       <h2 className="content__title">Всі піцци</h2>
