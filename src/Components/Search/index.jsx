@@ -1,14 +1,11 @@
-import React from 'react';
 import debounce from 'lodash.debounce';
+import React from 'react';
 //
 import { useDispatch } from 'react-redux';
 import { setSearchValue } from '../../redux/slices/filterSlice';
-
 //
-import { SearchContext } from '../../App.js';
-//
-import styles from './Search.module.scss';
 import close from '../../../src/assets/img/fhgjfvg.svg';
+import styles from './Search.module.scss';
 
 const Search = () => {
   const dispatch = useDispatch();

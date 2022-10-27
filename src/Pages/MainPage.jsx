@@ -6,7 +6,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setCategoryIndex,
-  setSortType,
   setCurrentPage,
   setFilters,
   filterSelector,
@@ -19,7 +18,6 @@ import PizzaBlock from '../Components/PizzaBlock/index';
 import Skeleton from '../Components/PizzaBlock/Skeleton';
 import Paginate from '../Pagination/index';
 import { list } from '../Components/Sort';
-import { SearchContext } from '../App';
 //
 //
 //

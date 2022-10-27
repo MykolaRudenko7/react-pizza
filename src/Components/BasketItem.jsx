@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 //
 import { addPizza, minusPizza, removePizzas } from '../redux/slices/basketSlice';
 
