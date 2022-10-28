@@ -4,7 +4,7 @@ import React from 'react';
 //
 type CategoriesProps = {
   value: number;
-  clickOnCategoty: any;
+  clickOnCategoty: (index: number) => void; //  void - пуста
 };
 
 const Categories: React.FC<CategoriesProps> = ({ value, clickOnCategoty }) => {

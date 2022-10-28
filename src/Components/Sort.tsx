@@ -31,10 +31,10 @@ const Sort: React.FC = () => {
     setOpenPopup(false);
   };
 
-  //   клік на сорт і поза ним
+  //  клік на сорт і поза ним
   React.useEffect(() => {
-    const onClickSort = (e: any) => {
-      if (!e.composedPath().includes(sortRef.current)) {
+    const onClickSort = (e: MouseEvent) => {
+      if (sortRef.current && !e.composedPath().includes(sortRef.current)) {
         setOpenPopup(false);
       }
     };

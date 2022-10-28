@@ -1,4 +1,3 @@
-// Library
 import qs from 'qs';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -21,7 +20,7 @@ import Paginate from '../Pagination/index';
 //
 //
 //
-const MainPage:React.FC = () => {
+const MainPage: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -31,11 +30,12 @@ const MainPage:React.FC = () => {
   const { categoryIndex, sortType, currentPage, searchValue } = useSelector(filterSelector);
   const { items, status } = useSelector(pizzasSelector); // pizzas and status laoding
 
-  const clickOnCategoty = React.useCallback((index:number) => {
+
+  const clickOnCategoty = React.useCallback((index: number) => {
     dispatch(setCategoryIndex(index));
   }, []);
 
-  const onChangePage = (pageNumber:number) => {
+  const onChangePage = (pageNumber: number) => {
     dispatch(setCurrentPage(pageNumber));
   };
 
@@ -95,7 +95,7 @@ const MainPage:React.FC = () => {
     isSearch.current = false;
   }, [categoryIndex, sortType.sortProp, searchValue, currentPage]);
   // піци для рендеру
-  const pizzas = items.map((item:any) => (
+  const pizzas = items.map((item: any) => (
     <Link to={`/pizza/${item.id}`} key={item.id}>
       <PizzaBlock {...item} />
     </Link>
@@ -106,7 +106,7 @@ const MainPage:React.FC = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryIndex} clickOnCategoty={(index:number) => clickOnCategoty(index)} />
+        <Categories value={categoryIndex} clickOnCategoty={(index: number) => clickOnCategoty(index)} />
         <Sort />
       </div>
       <h2 className="content__title">Всі піцци</h2>

@@ -7,25 +7,22 @@ import styles from './Pagination.module.scss';
 //
 type PaginationProps = {
   currentPage: number;
-  onChangePage: any;
+  onChangePage: (page: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ currentPage, onChangePage }) => {
-  return (
-    <ReactPaginate
-      className={styles.paginate}
-      breakLabel="..."
-      nextLabel="Наступна"
-      previousLabel="Попередня"
-      onPageChange={(e) => onChangePage(e.selected + 1)}
-      //   к-сть елементів на стр
-      pageRangeDisplayed={4}
-      //   к-сть сторінок
-      pageCount={3}
-      //
-      forcePage={currentPage - 1}
-    />
-  );
-};
+const Pagination: React.FC<PaginationProps> = ({ currentPage, onChangePage }) =>
+  <ReactPaginate
+    className={styles.paginate}
+    breakLabel="..."
+    nextLabel="Наступна"
+    previousLabel="Попередня"
+    onPageChange={(e) => onChangePage(e.selected + 1)}
+    //   к-сть елементів на стр
+    pageRangeDisplayed={4}
+    //   к-сть сторінок
+    pageCount={3}
+    //
+    forcePage={currentPage - 1}
+  />
 
 export default Pagination;

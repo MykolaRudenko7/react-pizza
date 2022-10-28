@@ -32,7 +32,7 @@ const Search: React.FC = () => {
   };
 
   //   запис значення
-  const onChangeValueInput = (e:any) => {
+  const onChangeValueInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLocalValueInput(e.target.value);
     delaySendValue(e.target.value);
   };
