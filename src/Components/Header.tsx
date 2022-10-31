@@ -4,17 +4,17 @@ import { Link, useLocation } from 'react-router-dom';
 import { basketSelector } from '../redux/slices/basketSlice';
 import Search from './Search/index';
 //
-import basket from "../assets/img/cart.svg";
+import basket from '../assets/img/cart.svg';
 import logoSvg from '../assets/img/pizza-logo.svg';
 //
 //
 //
-const Header:React.FC = () => {
+const Header: React.FC = () => {
   const location = useLocation();
 
   const { pizzasInBasket, totalPrice } = useSelector(basketSelector);
 
-  const totalCount = pizzasInBasket.reduce((sum:number, obj:any) => {
+  const totalCount = pizzasInBasket.reduce((sum: number, obj: any) => {
     return obj.count + sum;
   }, 0);
 
@@ -46,6 +46,6 @@ const Header:React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Header;

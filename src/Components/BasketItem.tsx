@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 //
-import { addPizza, minusPizza, removePizzas } from '../redux/slices/basketSlice';
+import { addPizza, minusPizza, PizzasInBasket, removePizzas } from '../redux/slices/basketSlice';
 //
 //
 //
-type BasketItemCategory = {
+type BasketItemProps = {
   id: string;
   title: string;
   type: string;
@@ -15,7 +15,7 @@ type BasketItemCategory = {
   imageUrl: string;
 };
 
-const BasketItem: React.FC<BasketItemCategory> = ({
+const BasketItem: React.FC<BasketItemProps> = ({
   id,
   title,
   type,
@@ -27,13 +27,13 @@ const BasketItem: React.FC<BasketItemCategory> = ({
   const dispatch = useDispatch();
   // кнопки
   const onClickPlus = () => {
-    dispatch(addPizza({ id }));
+    dispatch(addPizza({ id } as PizzasInBasket));
   };
   const onClickMinus = () => {
-    dispatch(minusPizza({ id }));
+    dispatch(minusPizza(id));
   };
   const onClickRemove = () => {
-    dispatch(removePizzas({ id }));
+    dispatch(removePizzas(id));
   };
 
   return (

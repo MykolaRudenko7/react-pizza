@@ -1,4 +1,3 @@
-import React from 'react';
 import ContentLoader from 'react-content-loader';
 
 const Skeleton = (props) => (
@@ -9,7 +8,8 @@ const Skeleton = (props) => (
     height={470}
     viewBox="0 0 280 470"
     backgroundColor="#e6e6e6"
-    foregroundColor="#ecebeb">
+    foregroundColor="#ecebeb"
+  >
     <circle cx="134" cy="137" r="130" />
     <rect x="3" y="425" rx="30" ry="30" width="85" height="44" />
     <rect x="159" y="425" rx="30" ry="30" width="120" height="44" />

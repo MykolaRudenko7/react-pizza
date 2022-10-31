@@ -1,7 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../store';
+//
+//
+//
+export type PizzasInBasket = {
+  id: string;
+  title: string;
+  type: string;
+  size: number;
+  price: number;
+  count: number;
+  imageUrl: string;
+};
+
+interface BasketSliceState {
+  totalPrice: number;
+  pizzasInBasket: PizzasInBasket[];
+}
 
 // state
-const initialState = {
+const initialState: BasketSliceState = {
   pizzasInBasket: [],
   totalPrice: 0,
 };
@@ -12,7 +30,7 @@ export const basketSlice = createSlice({
   initialState,
   //  працівники
   reducers: {
-    addPizza(state, action) {
+    addPizza(state, action: PayloadAction<PizzasInBasket>) {
       const repeatPizza = state.pizzasInBasket.find((obj) => obj.id === action.payload.id);
 
       if (repeatPizza) {
@@ -29,12 +47,12 @@ export const basketSlice = createSlice({
       }, 0);
     },
 
-    minusPizza(state, action) {
-      const repeatPizza = state.pizzasInBasket.find((obj) => obj.id === action.payload.id);
+    minusPizza(state, action: PayloadAction<string>) {
+      const repeatPizza = state.pizzasInBasket.find((obj) => obj.id === action.payload);
       if (repeatPizza) {
         repeatPizza.count--;
       }
-      if (repeatPizza.count === 0) {
+      if (repeatPizza?.count === 0) {
         state.pizzasInBasket = state.pizzasInBasket.filter((obj) => obj.count > 0);
       }
       state.totalPrice = state.pizzasInBasket.reduce((sum, obj) => {
@@ -42,8 +60,8 @@ export const basketSlice = createSlice({
       }, 0);
     },
 
-    removePizzas(state, action) {
-      state.pizzasInBasket = state.pizzasInBasket.filter((obj) => obj.id !== action.payload.id);
+    removePizzas(state, action: PayloadAction<string>) {
+      state.pizzasInBasket = state.pizzasInBasket.filter((obj) => obj.id !== action.payload);
       state.totalPrice = state.pizzasInBasket.reduce((sum, obj) => {
         return obj.price * obj.count + sum;
       }, 0);
@@ -56,9 +74,9 @@ export const basketSlice = createSlice({
   },
 });
 
-export const basketSelector = (state) => state.basket;
+export const basketSelector = (state: RootState) => state.basket;
 
-export const getItemsByIdSelector = (id) => (state) =>
+export const getItemsByIdSelector = (id: string) => (state: RootState) =>
   state.basket.pizzasInBasket.find((obj) => obj.id === id);
 
 export const { addPizza, minusPizza, removePizzas, clearBasket } = basketSlice.actions;

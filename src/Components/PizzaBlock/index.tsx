@@ -1,26 +1,20 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPizza, getItemsByIdSelector } from '../../redux/slices/basketSlice';
+import { Link } from 'react-router-dom';
+import { addPizza, getItemsByIdSelector, PizzasInBasket } from '../../redux/slices/basketSlice';
 //
 //
 //
 type PizzaBlockProps = {
   id: string;
   title: string;
-  types: number[];
-  sizes: number[];
   price: number;
   imageUrl: string;
+  sizes: number[];
+  types: number[];
 };
 
-const PizzaBlock: React.FC<PizzaBlockProps> = ({
-  id,
-  title,
-  price,
-  imageUrl,
-  sizes,
-  types,
-}) => {
+const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageUrl, sizes, types }) => {
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
   const nameTypes = ['тонке', 'традиційне'];
@@ -28,16 +22,17 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
   const dispatch = useDispatch();
 
   const items = useSelector(getItemsByIdSelector(id));
-  const showCount = items ? items.count : '';
+  const showCount = items ? items.count : 0;
 
   const onClickAddPizza = () => {
-    const pizzasObj = {
+    const pizzasObj: PizzasInBasket = {
       id,
       title,
       price,
       imageUrl,
       size: sizes[activeSize],
       type: nameTypes[activeType],
+      count: 0,
     };
     dispatch(addPizza(pizzasObj));
   };
@@ -45,8 +40,10 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
   return (
     <div className="pizza-block-wrapper">
       <div className="pizza-block">
-        <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
-        <h4 className="pizza-block__title">{title}</h4>
+        <Link to={`/pizza/${id}`} key={id}>
+          <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+          <h4 className="pizza-block__title">{title}</h4>
+        </Link>
         <div className="pizza-block__selector">
           <ul>
             {types.map((type, index) => (
@@ -87,7 +84,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
               />
             </svg>
             <span> Додати </span>
-            {showCount && <i>{items.count}</i>}
+            {showCount && <i>{items?.count}</i>}
           </button>
         </div>
       </div>

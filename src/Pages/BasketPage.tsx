@@ -9,11 +9,11 @@ import BasketEmpty from '../Components/BasketEmpty';
 const BasketPage: React.FC = () => {
   const { pizzasInBasket, totalPrice } = useSelector(basketSelector);
 
-  const totalCount = pizzasInBasket.reduce((sum:number, obj:any) => {
+  const totalCount = pizzasInBasket.reduce((sum: number, obj: any) => {
     return obj.count + sum;
   }, 0);
 
-  const elements = useSelector((state:any) => state.basket.pizzasInBasket);
+  const elements = useSelector((state: any) => state.basket.pizzasInBasket);
   const dispatch = useDispatch();
   const onClickClear = () => {
     dispatch(clearBasket());
@@ -101,7 +101,7 @@ const BasketPage: React.FC = () => {
           </div>
         </div>
         <div className="content__items">
-          {elements.map((obj:any) => (
+          {elements.map((obj: any) => (
             <BasketItem key={obj.id} {...obj} />
           ))}
         </div>

@@ -1,22 +1,22 @@
 import React from 'react';
 // redax
 import { useDispatch, useSelector } from 'react-redux';
-import { setSortType, sortTypeSelector } from '../redux/slices/filterSlice';
+import { setSortType, SortPropEnum, sortTypeSelector } from '../redux/slices/filterSlice';
 //
 //
 //
-type SortItem = {
+type SortList = {
   name: string;
-  sortProp: string;
+  sortProp: SortPropEnum;
 };
 
-export const list: SortItem[] = [
-  { name: 'популярності (спадання)', sortProp: 'rating' },
-  { name: 'популярності (зростання)', sortProp: '-rating' },
-  { name: 'ціною (спаданням)', sortProp: 'price' },
-  { name: 'ціною (зростання)', sortProp: '-price' },
-  { name: 'алфавітом (спадання)', sortProp: 'title' },
-  { name: 'алфавітом (зростання)', sortProp: '-title' },
+export const list: SortList[] = [
+  { name: 'популярності (спадання)', sortProp: SortPropEnum.RATING_DESC },
+  { name: 'популярності (зростання)', sortProp: SortPropEnum.RATING_ASC },
+  { name: 'ціною (спаданням)', sortProp: SortPropEnum.PRICE_DESC },
+  { name: 'ціною (зростання)', sortProp: SortPropEnum.PRICE_ASC },
+  { name: 'алфавітом (спадання)', sortProp: SortPropEnum.TITLE_DESC },
+  { name: 'алфавітом (зростання)', sortProp: SortPropEnum.TITLE_ASC },
 ];
 
 const Sort: React.FC = () => {
@@ -26,7 +26,7 @@ const Sort: React.FC = () => {
   const sortRef = React.useRef<HTMLDivElement>(null);
   const [openPopup, setOpenPopup] = React.useState(false);
 
-  const onClickListItem = (obj: SortItem) => {
+  const onClickListItem = (obj: SortList) => {
     dispatch(setSortType(obj));
     setOpenPopup(false);
   };
