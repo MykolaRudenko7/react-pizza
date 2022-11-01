@@ -55,19 +55,21 @@ body {
 
 	&__items {
 		display: grid;
+		justify-content: space-between;
 		grid-template-columns: repeat(4, 1fr);
 		grid-template-rows: repeat(1, 1fr);
 		grid-column-gap: 25px;
 
-		@media (max-width: 1420px) {
+		@media (max-width: 1480px) {
 			grid-template-columns: repeat(3, 1fr);
 		}
 
-		@media (max-width: 1080px) {
+		@media (max-width: 1150px) {
 			grid-template-columns: repeat(2, 1fr);
+		grid-column-gap: 20px;
 		}
 
-		@media (max-width: 740px) {
+		@media (max-width: 780px) {
 			grid-template-columns: repeat(1, 1fr);
 		}
 	}
@@ -241,11 +243,32 @@ body {
 			width: 13%;
 
 			&-minus {
-				svg {
-					path:first-of-type {
-						display: none;
+				&:disabled {
+					opacity: 0.2;
+					color: #8d8d8d;
+
+					&:hover {
+						background-color: transparent;
+					}
+
+					&:active {
+						transform: none;
 					}
 				}
+			}
+
+			&-minus,
+			&-plus,
+			&-remove {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 25px;
+				font-weight: 700;
+			}
+
+			&-remove {
+				color: #000;
 			}
 
 			b {

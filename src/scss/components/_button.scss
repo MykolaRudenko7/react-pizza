@@ -56,6 +56,7 @@
   &--outline {
     background-color: #fff;
     border-color: $orange;
+
     &,
     span {
       color: $orange;
@@ -130,12 +131,14 @@
   }
 
   &--cart {
+    min-width: 157px;
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
     line-height: 23px;
     padding: 12px 25px;
 
-    svg {
+    img {
       margin-right: 8px;
       margin-bottom: 1px;
     }

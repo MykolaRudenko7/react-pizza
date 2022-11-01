@@ -104,6 +104,7 @@ const MainPage: React.FC = () => {
     }
     isSearch.current = false;
   }, [categoryIndex, sortType.sortProp, searchValue, currentPage]);
+
   // піци для рендеру
   const pizzas = items.map((item: any) => <PizzaBlock key={item.id} {...item} />);
   // заглушки
@@ -114,9 +115,9 @@ const MainPage: React.FC = () => {
       <div className="content__top">
         <Categories
           value={categoryIndex}
-          clickOnCategoty={(index: number) => clickOnCategoty(index)}
+          clickOnCategoty={clickOnCategoty}
         />
-        <Sort />
+        <Sort value={sortType}/>
       </div>
       <h2 className="content__title">Всі піцци</h2>
       {status === Status.ERROR ? (

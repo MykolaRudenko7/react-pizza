@@ -4,7 +4,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setSearchValue } from '../../redux/slices/filterSlice';
 //
-import close from '../../../src/assets/img/fhgjfvg.svg';
+// import close from '../../../src/assets/img/clear.svg';
 import styles from './Search.module.scss';
 //
 //
@@ -68,12 +68,12 @@ const Search: React.FC = () => {
         placeholder="Пошук піцци"
       />
       {localValueInput && (
-        <img
-          className={styles.clean}
-          src={close}
-          onClick={() => onClickClear()}
-          alt="clean button"
-        />
+        <>
+          <span className={styles.clean} onClick={() => onClickClear()}>
+            ×
+          </span>
+          <span />
+        </>
       )}
     </div>
   );
