@@ -131,9 +131,8 @@
   }
 
   &--cart {
-    min-width: 157px;
     display: flex;
-    flex-wrap: nowrap;
+    flex: 1 0;
     align-items: center;
     line-height: 23px;
     padding: 12px 25px;
@@ -144,6 +143,7 @@
     }
 
     span {
+      align-items: center;
       font-weight: 600;
       font-size: 16px;
     }

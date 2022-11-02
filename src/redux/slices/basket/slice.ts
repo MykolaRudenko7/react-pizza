@@ -1,27 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
+import { calcTotalPrice } from '../../../utils/calcTotalPrice';
+import { getPizzaFromLS } from '../../../utils/getPizzaFromLS';
+import { BasketSliceState, PizzasInBasket } from './types';
 //
 //
 //
-export type PizzasInBasket = {
-  id: string;
-  title: string;
-  type: string;
-  size: number;
-  price: number;
-  count: number;
-  imageUrl: string;
-};
-
-interface BasketSliceState {
-  totalPrice: number;
-  pizzasInBasket: PizzasInBasket[];
-}
+//
+//
+const { totalPizzas, totalPrice } = getPizzaFromLS();
 
 // state
 const initialState: BasketSliceState = {
-  pizzasInBasket: [],
-  totalPrice: 0,
+  // витягаю додані піци одразу з ЛС
+  pizzasInBasket: totalPizzas,
+  totalPrice: totalPrice,
 };
 
 // slice
@@ -42,9 +34,7 @@ export const basketSlice = createSlice({
         });
       }
       //загальна сума
-      state.totalPrice = state.pizzasInBasket.reduce((sum, obj) => {
-        return obj.price * obj.count + sum;
-      }, 0);
+      state.totalPrice = calcTotalPrice(state.pizzasInBasket);
     },
 
     minusPizza(state, action: PayloadAction<string>) {
@@ -52,19 +42,12 @@ export const basketSlice = createSlice({
       if (repeatPizza) {
         repeatPizza.count--;
       }
-      if (repeatPizza?.count === 0) {
-        state.pizzasInBasket = state.pizzasInBasket.filter((obj) => obj.count > 0);
-      }
-      state.totalPrice = state.pizzasInBasket.reduce((sum, obj) => {
-        return obj.price * obj.count + sum;
-      }, 0);
+      state.totalPrice = calcTotalPrice(state.pizzasInBasket);
     },
 
     removePizzas(state, action: PayloadAction<string>) {
       state.pizzasInBasket = state.pizzasInBasket.filter((obj) => obj.id !== action.payload);
-      state.totalPrice = state.pizzasInBasket.reduce((sum, obj) => {
-        return obj.price * obj.count + sum;
-      }, 0);
+      state.totalPrice = calcTotalPrice(state.pizzasInBasket);
     },
 
     clearBasket(state) {
@@ -74,10 +57,6 @@ export const basketSlice = createSlice({
   },
 });
 
-export const basketSelector = (state: RootState) => state.basket;
-
-export const getItemsByIdSelector = (id: string) => (state: RootState) =>
-  state.basket.pizzasInBasket.find((obj) => obj.id === id);
 
 export const { addPizza, minusPizza, removePizzas, clearBasket } = basketSlice.actions;
 export default basketSlice.reducer;

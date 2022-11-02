@@ -4,6 +4,8 @@ import emptyCard from '../assets/img/empty-cart.png';
 //
 //
 //
+//
+//
 const BasketEmpty: React.FC = () => (
   <div className="cart cart--empty">
     <h2>Кошик пустий 😕</h2>

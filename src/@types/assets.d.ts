@@ -1,4 +1,4 @@
-// кажу, що це на js module а спеціальний тип (для ТС)
+// кажу, що це не js module а спеціальний тип (для ТС)
 declare module '*.svg' {
   const content: any;
   export default content;

@@ -66,7 +66,7 @@ body {
 
 		@media (max-width: 1150px) {
 			grid-template-columns: repeat(2, 1fr);
-		grid-column-gap: 20px;
+			grid-column-gap: 20px;
 		}
 
 		@media (max-width: 780px) {
@@ -147,18 +147,13 @@ body {
 		display: flex;
 		align-items: center;
 		font-size: 32px;
-
-		svg {
+		img {
+			filter:invert(1);
 			position: relative;
 			top: -2px;
 			width: 30px;
 			height: 30px;
 			margin-right: 10px;
-
-			path {
-				stroke: $black;
-				strokeWidth: 1.9;
-			}
 		}
 	}
 
@@ -176,16 +171,14 @@ body {
 		}
 
 		span,
-		svg,
+		img,
 		path {
 			transition: all $duration ease-in-out;
 		}
 
 		&:hover {
-			svg {
-				path {
-					stroke: darken($color: #b6b6b6, $amount: 50);
-				}
+			img {
+				filter:invert(1);
 			}
 
 			span {

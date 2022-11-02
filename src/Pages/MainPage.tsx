@@ -3,18 +3,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 // redux
 import { useSelector } from 'react-redux';
-import {
-  filterSelector,
-  setCategoryIndex,
-  setCurrentPage,
-  setFilters,
-} from '../redux/slices/filterSlice';
-import {
-  fetchPizzas,
-  PizzaSearchParametr,
-  pizzasSelector,
-  Status,
-} from '../redux/slices/pizzasSlice';
+import { filterSelector } from '../redux/slices/filter/selectors';
+import { setCategoryIndex, setCurrentPage, setFilters } from '../redux/slices/filter/slice';
+import { fetchPizzas } from '../redux/slices/pizza/asyncActions';
+import { pizzasSelector } from '../redux/slices/pizza/selectors';
+import { PizzaSearchParametr, Status } from '../redux/slices/pizza/types';
 // Components
 import Categories from '../Components/Categories';
 import PizzaBlock from '../Components/PizzaBlock/index';
@@ -113,11 +106,8 @@ const MainPage: React.FC = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories
-          value={categoryIndex}
-          clickOnCategoty={clickOnCategoty}
-        />
-        <Sort value={sortType}/>
+        <Categories value={categoryIndex} clickOnCategoty={clickOnCategoty} />
+        <Sort value={sortType} />
       </div>
       <h2 className="content__title">Всі піцци</h2>
       {status === Status.ERROR ? (

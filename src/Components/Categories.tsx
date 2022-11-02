@@ -2,6 +2,8 @@ import React from 'react';
 //
 //
 //
+//
+//
 type CategoriesProps = {
   value: number;
   clickOnCategoty: (index: number) => void; //  void - пуста

@@ -1,7 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 //
-import { addPizza, minusPizza, PizzasInBasket, removePizzas } from '../redux/slices/basketSlice';
+import { addPizza, minusPizza, removePizzas } from '../redux/slices/basket/slice';
+import { PizzasInBasket } from '../redux/slices/basket/types';
+//
+//
 //
 //
 //

@@ -1,7 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addPizza, getItemsByIdSelector, PizzasInBasket } from '../../redux/slices/basketSlice';
+import { getItemsByIdSelector } from '../../redux/slices/basket/selectors';
+import { addPizza } from '../../redux/slices/basket/slice';
+import { PizzasInBasket } from '../../redux/slices/basket/types';
+//
+//
 //
 //
 //

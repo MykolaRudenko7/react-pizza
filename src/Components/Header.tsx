@@ -1,7 +1,8 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 //
-import { basketSelector } from '../redux/slices/basketSlice';
+import { basketSelector } from '../redux/slices/basket/selectors';
 import Search from './Search/index';
 //
 import basket from '../assets/img/cart.svg';
@@ -9,10 +10,23 @@ import logoSvg from '../assets/img/pizza-logo.svg';
 //
 //
 //
+//
+//
 const Header: React.FC = () => {
   const location = useLocation();
 
   const { pizzasInBasket, totalPrice } = useSelector(basketSelector);
+
+  //  при додаванні піци в корзину, вона преводиться в строчку і зберігається в ЛС
+  const isFirstRender = React.useRef(false);
+  React.useEffect(() => {
+    if (isFirstRender.current) {
+      const pizzaInBasketJson = JSON.stringify(pizzasInBasket);
+      localStorage.setItem('basket', pizzaInBasketJson);
+    }
+    isFirstRender.current = true;
+  }, [pizzasInBasket]);
+
 
   const totalCount = pizzasInBasket.reduce((sum: number, obj: any) => {
     return obj.count + sum;
