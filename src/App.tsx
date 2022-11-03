@@ -1,13 +1,19 @@
+import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 // Components
-import TopPage from './Components/TopPage';
-import Pizza from './Pages/Pizza';
+import { Loading, TopPage } from './Components';
 // pages
-import BasketPage from './Pages/BasketPage';
 import MainPage from './Pages/MainPage';
-import NotFound from './Pages/NotFoundPage';
 // Style
 import './scss/app.scss';
+// pages lazy load
+const BasketPage = React.lazy(
+  () => import(/* webpackaChunkName: "BasketPage" */ './Pages/BasketPage'),
+);
+const Pizza = React.lazy(() => import(/* webpackaChunkName: "PizzaPage" */ './Pages/Pizza'));
+const NotFound = React.lazy(
+  () => import(/* webpackaChunkName: "NotFoundPage" */ './Pages/NotFoundPage'),
+);
 //
 //
 //
@@ -18,9 +24,30 @@ function App() {
     <Routes>
       <Route path="/" element={<TopPage />}>
         <Route path="" element={<MainPage />} />
-        <Route path="Basket" element={<BasketPage />} />
-        <Route path="pizza/:id" element={<Pizza />} />
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="Basket"
+          element={
+            <Suspense fallback={<Loading />}>
+              <BasketPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="pizza/:id"
+          element={
+            <Suspense fallback={<Loading />}>
+              <Pizza />
+            </Suspense>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <Suspense fallback={<Loading />}>
+              <NotFound />
+            </Suspense>
+          }
+        />
       </Route>
     </Routes>
   );

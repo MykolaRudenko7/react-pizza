@@ -1,6 +1,6 @@
 import React from 'react';
+import { NotFoundBlock } from '../Components';
 //
-import NotFoundBlock from '../Components/NotFoundBlock/index';
 //
 //
 //

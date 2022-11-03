@@ -1,6 +1,6 @@
 import debounce from 'lodash.debounce';
 import React from 'react';
-//
+// redux
 import { useDispatch } from 'react-redux';
 import { setSearchValue } from '../../redux/slices/filter/slice';
 //
@@ -10,7 +10,7 @@ import styles from './Search.module.scss';
 //
 //
 //
-const Search: React.FC = () => {
+export const Search: React.FC = () => {
   const dispatch = useDispatch();
 
   // state input for server
@@ -79,5 +79,3 @@ const Search: React.FC = () => {
     </div>
   );
 };
-
-export default Search;

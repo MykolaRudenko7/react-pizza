@@ -8,13 +8,10 @@ import { setCategoryIndex, setCurrentPage, setFilters } from '../redux/slices/fi
 import { fetchPizzas } from '../redux/slices/pizza/asyncActions';
 import { pizzasSelector } from '../redux/slices/pizza/selectors';
 import { PizzaSearchParametr, Status } from '../redux/slices/pizza/types';
-// Components
-import Categories from '../Components/Categories';
-import PizzaBlock from '../Components/PizzaBlock/index';
-import Skeleton from '../Components/PizzaBlock/Skeleton';
-import Sort, { list } from '../Components/Sort';
-import Paginate from '../Pagination/index';
 import { useAppDispatch } from '../redux/store';
+// Components
+import { Categories, Pagination, PizzaBlock, Skeleton, Sort } from '../Components';
+import { list } from '../Components/Sort';
 //
 //
 //
@@ -118,7 +115,7 @@ const MainPage: React.FC = () => {
       ) : (
         <div className="content__items">{status === 'loading' ? skeletons : pizzas}</div>
       )}
-      <Paginate currentPage={currentPage} onChangePage={onChangePage} />
+      <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );
 };

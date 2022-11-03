@@ -1,19 +1,19 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import BasketItem from '../Components/BasketItem';
+import {BasketItem} from '../Components/BasketItem';
+import { basketSelector } from '../redux/slices/basket/selectors';
 import { clearBasket } from '../redux/slices/basket/slice';
-import {basketSelector} from '../redux/slices/basket/selectors';
 //
-import BasketEmpty from '../Components/BasketEmpty';
+import { BasketEmpty } from '../Components/BasketEmpty';
 //
-import trash from '../assets/img/trash.svg';
 import basket from '../assets/img/cart.svg';
+import trash from '../assets/img/trash.svg';
 //
 //
 //
 //
-// 
+//
 const BasketPage: React.FC = () => {
   const { pizzasInBasket, totalPrice } = useSelector(basketSelector);
 

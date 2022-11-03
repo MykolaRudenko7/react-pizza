@@ -1,24 +1,20 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 //
-import Header from './Header';
+import { Header } from './Header';
 //
 //
 //
 //
 //
-const TopPage: React.FC = () => {
+export const TopPage: React.FC = () => {
   return (
     <div className="wrapper">
       <Header />
       <div className="content">
-        <div className="container">
-          {/* тут динаміка */}
-          <Outlet />
-        </div>
+        {/* тут динаміка */}
+        <Outlet />
       </div>
     </div>
   );
 };
-
-export default TopPage;

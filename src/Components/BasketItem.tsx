@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-//
+// redux
 import { addPizza, minusPizza, removePizzas } from '../redux/slices/basket/slice';
 import { PizzasInBasket } from '../redux/slices/basket/types';
 //
@@ -18,7 +18,7 @@ type BasketItemProps = {
   imageUrl: string;
 };
 
-const BasketItem: React.FC<BasketItemProps> = ({
+export const BasketItem: React.FC<BasketItemProps> = ({
   id,
   title,
   type,
@@ -80,5 +80,3 @@ const BasketItem: React.FC<BasketItemProps> = ({
     </div>
   );
 };
-
-export default BasketItem;

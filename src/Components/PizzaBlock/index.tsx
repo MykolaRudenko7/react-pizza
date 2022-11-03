@@ -1,6 +1,7 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+// redux
+import { useDispatch, useSelector } from 'react-redux';
 import { getItemsByIdSelector } from '../../redux/slices/basket/selectors';
 import { addPizza } from '../../redux/slices/basket/slice';
 import { PizzasInBasket } from '../../redux/slices/basket/types';
@@ -18,7 +19,7 @@ type PizzaBlockProps = {
   types: number[];
 };
 
-const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageUrl, sizes, types }) => {
+export const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageUrl, sizes, types }) => {
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
   const nameTypes = ['тонке', 'традиційне'];
@@ -95,5 +96,3 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageUrl, siz
     </div>
   );
 };
-
-export default PizzaBlock;

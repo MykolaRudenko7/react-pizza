@@ -126,7 +126,7 @@ body {
 
 	&--cart {
 		max-width: 820px;
-		margin: 90px auto;
+		margin: 0px auto;
 
 		.content__title {
 			margin: 0;
@@ -147,8 +147,9 @@ body {
 		display: flex;
 		align-items: center;
 		font-size: 32px;
+
 		img {
-			filter:invert(1);
+			filter: invert(1);
 			position: relative;
 			top: -2px;
 			width: 30px;
@@ -178,7 +179,7 @@ body {
 
 		&:hover {
 			img {
-				filter:invert(1);
+				filter: invert(1);
 			}
 
 			span {

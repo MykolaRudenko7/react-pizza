@@ -9,7 +9,7 @@ type CategoriesProps = {
   clickOnCategoty: (index: number) => void; //  void - пуста
 };
 
-const Categories: React.FC<CategoriesProps> = React.memo(({ value, clickOnCategoty }) => {
+export const Categories: React.FC<CategoriesProps> = React.memo(({ value, clickOnCategoty }) => {
   const categories = ['Всі', "М'ясні", 'Веганські', 'Гриль', 'Гострі', 'Закриті'];
 
   return (
@@ -28,5 +28,3 @@ const Categories: React.FC<CategoriesProps> = React.memo(({ value, clickOnCatego
     </div>
   );
 });
-
-export default Categories;
