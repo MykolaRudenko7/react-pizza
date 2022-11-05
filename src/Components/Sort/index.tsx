@@ -1,8 +1,10 @@
 import React from 'react';
 // redax
 import { useDispatch } from 'react-redux';
-import { setSortType } from '../redux/slices/filter/slice';
-import { SortPropEnum } from '../redux/slices/filter/types';
+import { setSortType } from '../../redux/slices/filter/slice';
+import { SortPropEnum } from '../../redux/slices/filter/types';
+//
+import styles from './Sort.module.scss';
 //
 //
 //
@@ -52,8 +54,8 @@ export const Sort: React.FC<SortProp> = React.memo(({ value }) => {
   }, []);
 
   return (
-    <div ref={sortRef} className="sort">
-      <div className="sort__label">
+    <div ref={sortRef} className={styles.sort}>
+      <div className={styles.sort__label}>
         <svg
           width="10"
           height="6"
@@ -70,12 +72,12 @@ export const Sort: React.FC<SortProp> = React.memo(({ value }) => {
         <span onClick={() => setOpenPopup(!openPopup)}>{value.name}</span>
       </div>
       {openPopup && (
-        <div className="sort__popup">
+        <div className={styles.sort__popup}>
           <ul>
             {list.map((obj, index) => (
               <li
                 key={index}
-                className={value.sortProp === obj.sortProp ? 'active' : ''}
+                className={value.sortProp === obj.sortProp ? styles.active : ''}
                 onClick={() => onClickListItem(obj)}
               >
                 {obj.name}

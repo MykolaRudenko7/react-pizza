@@ -6,6 +6,8 @@ import { getItemsByIdSelector } from '../../redux/slices/basket/selectors';
 import { addPizza } from '../../redux/slices/basket/slice';
 import { PizzasInBasket } from '../../redux/slices/basket/types';
 //
+import styles from "./PizzaBlock.module.scss";
+//
 //
 //
 //
@@ -43,19 +45,19 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageU
   };
 
   return (
-    <div className="pizza-block-wrapper">
-      <div className="pizza-block">
+    <div className={styles.pizza_block_wrapper}>
+      <div className={styles.pizza_block}>
         <Link to={`/pizza/${id}`} key={id}>
-          <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
-          <h4 className="pizza-block__title">{title}</h4>
+          <img className={styles.pizza_block__image} src={imageUrl} alt="Pizza" />
+          <h4 className={styles.pizza_block__title}>{title}</h4>
         </Link>
-        <div className="pizza-block__selector">
+        <div className={styles.pizza_block__selector}>
           <ul>
             {types.map((type, index) => (
               <li
                 key={index}
                 onClick={() => setActiveType(index)}
-                className={activeType === type ? 'active' : ''}
+                className={activeType === type ? styles.active : ''}
               >
                 {nameTypes[type]}
               </li>
@@ -66,16 +68,16 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageU
               <li
                 key={index}
                 onClick={() => setActiveSize(index)}
-                className={activeSize === index ? 'active' : ''}
+                className={(activeSize === index )? styles.active : ''}
               >
                 {size} см
               </li>
             ))}
           </ul>
         </div>
-        <div className="pizza-block__bottom">
-          <div className="pizza-block__price">{price} грн</div>
-          <button onClick={onClickAddPizza} className="button button--outline button--add">
+        <div className={styles.pizza_block__bottom}>
+          <div className={styles.pizza_block__price}>{price} грн</div>
+          <button onClick={onClickAddPizza} className={styles.button_add}>
             <svg
               width="12"
               height="12"
@@ -89,7 +91,9 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageU
               />
             </svg>
             <span> Додати </span>
-            {showCount && <i>{items?.count}</i>}
+            {
+            showCount > 0 && <i>{items?.count}</i>
+            }
           </button>
         </div>
       </div>

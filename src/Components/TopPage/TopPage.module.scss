@@ -1,0 +1,26 @@
+.wrapper {
+
+	margin: 49px auto;
+	padding: 67px 49px;
+
+	width: calc(100vw - 100px);
+	height: 100%;
+	background-color: #fff;
+	border-radius: 10px;
+
+	@media (max-width: 1025px) {
+		margin: 35px auto;
+		padding: 50px 40px;
+	}
+
+	@media (max-width: 768px) {
+		width: calc(100vw - 20px);
+		margin: 25px auto;
+		padding: 30px 20px;
+	}
+
+	@media (max-width: 376px) {
+		margin: 15px auto;
+		padding: 15px 15px;
+	}
+}

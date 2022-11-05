@@ -5,12 +5,12 @@ import { Loading, TopPage } from './Components';
 // pages
 import MainPage from './Pages/MainPage';
 // Style
-import './scss/app.scss';
+import './scss/components/app.scss';
 // pages lazy load
 const BasketPage = React.lazy(
   () => import(/* webpackaChunkName: "BasketPage" */ './Pages/BasketPage'),
 );
-const Pizza = React.lazy(() => import(/* webpackaChunkName: "PizzaPage" */ './Pages/Pizza'));
+const Pizza = React.lazy(() => import(/* webpackaChunkName: "PizzaPage" */ './Pages/Pizza/Pizza'));
 const NotFound = React.lazy(
   () => import(/* webpackaChunkName: "NotFoundPage" */ './Pages/NotFoundPage'),
 );

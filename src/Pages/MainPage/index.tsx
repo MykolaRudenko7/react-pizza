@@ -3,15 +3,17 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 // redux
 import { useSelector } from 'react-redux';
-import { filterSelector } from '../redux/slices/filter/selectors';
-import { setCategoryIndex, setCurrentPage, setFilters } from '../redux/slices/filter/slice';
-import { fetchPizzas } from '../redux/slices/pizza/asyncActions';
-import { pizzasSelector } from '../redux/slices/pizza/selectors';
-import { PizzaSearchParametr, Status } from '../redux/slices/pizza/types';
-import { useAppDispatch } from '../redux/store';
+import { filterSelector } from '../../redux/slices/filter/selectors';
+import { setCategoryIndex, setCurrentPage, setFilters } from '../../redux/slices/filter/slice';
+import { fetchPizzas } from '../../redux/slices/pizza/asyncActions';
+import { pizzasSelector } from '../../redux/slices/pizza/selectors';
+import { PizzaSearchParametr, Status } from '../../redux/slices/pizza/types';
+import { useAppDispatch } from '../../redux/store';
 // Components
-import { Categories, Pagination, PizzaBlock, Skeleton, Sort } from '../Components';
-import { list } from '../Components/Sort';
+import { Categories, Pagination, PizzaBlock, Skeleton, Sort } from '../../Components';
+import { list } from '../../Components/Sort';
+//
+import styles from './MainPage.module.scss';
 //
 //
 //
@@ -101,19 +103,19 @@ const MainPage: React.FC = () => {
   const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
 
   return (
-    <div className="container">
-      <div className="content__top">
+    <div className={styles.content}>
+      <div className={styles.content__top}>
         <Categories value={categoryIndex} clickOnCategoty={clickOnCategoty} />
         <Sort value={sortType} />
       </div>
-      <h2 className="content__title">Всі піцци</h2>
+      <h2 className={styles.content__title}>Всі піцци</h2>
       {status === Status.ERROR ? (
-        <div className="content__error">
+        <div className={styles.content__error}>
           <h2>Відбулась помилка</h2>
           <p>На жаль, не вдалося отримати піцци, спробуйте повторити пізніше</p>
         </div>
       ) : (
-        <div className="content__items">{status === 'loading' ? skeletons : pizzas}</div>
+        <div className={styles.content__items}>{status === 'loading' ? skeletons : pizzas}</div>
       )}
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>

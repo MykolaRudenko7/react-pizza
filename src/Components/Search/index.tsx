@@ -47,9 +47,9 @@ export const Search: React.FC = () => {
   );
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.search}>
       <svg
-        className={styles.icon}
+        className={styles.search__icon}
         enableBackground="new 0 0 32 32"
         id="Glyph"
         version="1.1"
@@ -65,12 +65,12 @@ export const Search: React.FC = () => {
         ref={inputRef}
         value={localValueInput}
         onChange={(e) => onChangeValueInput(e)}
-        className={styles.input}
+        className={styles.search__input}
         placeholder="Пошук піцци"
       />
       {localValueInput && (
         <>
-          <span className={styles.clean} onClick={() => onClickClear()}>
+          <span className={styles.search__clean} onClick={() => onClickClear()}>
             ×
           </span>
           <span />

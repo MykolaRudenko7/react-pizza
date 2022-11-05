@@ -2,6 +2,8 @@ import axios from 'axios';
 import React from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 //
+import styles from './Pizza.module.scss';
+//
 //
 //
 //
@@ -25,13 +27,14 @@ const Pizza: React.FC = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className={styles.fullPizza}>
       <img src={pizza?.imageUrl} alt="image pizza" />
       <h2>{pizza?.title}</h2>
+      <br />
       <p>{pizza?.price} грн</p>
       <br />
       <Link to="/">
-        <button className="button button--outline">
+        <button className={styles.go_back_btn}>
           <span>Назад</span>
         </button>
       </Link>

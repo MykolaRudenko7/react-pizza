@@ -1,0 +1,47 @@
+@import '../../scss/components/variables';
+@import '../../scss/components/normalize';
+
+.fullPizza {
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 70px;
+
+	img {
+		max-width: 80%;
+	}
+}
+
+.go_back_btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 16px 26px;
+
+	color: #CACACA;
+	background: #fff;
+	border: 1px solid #D3D3D3;
+	border-radius: 30px;
+	font-weight: 700;
+
+	span {
+		color: #CACACA;
+	}
+
+	&:hover {
+		background-color: darken($color: $gray-line, $amount: 90);
+		border-color: darken($color: $gray-line, $amount: 90);
+
+		span {
+			color: $gray-line;
+		}
+	}
+
+	&:active {
+		transform: translateY(2px);
+	}
+
+	@media (max-width: 768px) {
+		padding: 12px 10px;
+		font-size: 12px;
+	}
+}

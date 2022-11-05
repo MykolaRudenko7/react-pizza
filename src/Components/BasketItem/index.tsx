@@ -1,8 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 // redux
-import { addPizza, minusPizza, removePizzas } from '../redux/slices/basket/slice';
-import { PizzasInBasket } from '../redux/slices/basket/types';
+import { addPizza, minusPizza, removePizzas } from '../../redux/slices/basket/slice';
+import { PizzasInBasket } from '../../redux/slices/basket/types';
+//
+import styles from './BasketItem.module.scss';
 //
 //
 //
@@ -40,39 +42,38 @@ export const BasketItem: React.FC<BasketItemProps> = ({
   };
 
   return (
-    <div className="cart__item">
-      <div className="cart__item-img">
-        <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+    <div className={styles.basket__item}>
+      <div className={styles.basket__item_img}>
+        <img src={imageUrl} alt="Pizza" />
       </div>
-      <div className="cart__item-info">
+      <div className={styles.basket__item_info}>
         <h3>{title}</h3>
         <p>
           {type}, {size} см
         </p>
       </div>
-      <div className="cart__item-count">
+      <div className={styles.basket__item_count}>
         <button
           disabled={count === 1}
           onClick={onClickMinus}
-          className="button button--outline button--circle cart__item-count-minus"
+          className={styles.basket__item_count_minus}
         >
           -
         </button>
         <b>{count}</b>
         <button
           onClick={onClickPlus}
-          className="button button--outline button--circle cart__item-count-plus"
-        >
+          className={styles.basket__item_count_plus}>
           +
         </button>
       </div>
-      <div className="cart__item-price">
+      <div className={styles.basket__item_price}>
         <b>{count * price} грн</b>
       </div>
-      <div className="cart__item-remove">
+      <div className={styles.basket__item_remove}>
         <button
           onClick={onClickRemove}
-          className="button button--outline button--circle cart__item-count-remove"
+          className={styles.basket__item_count_remove}
         >
           ×
         </button>
@@ -80,3 +81,4 @@ export const BasketItem: React.FC<BasketItemProps> = ({
     </div>
   );
 };
+

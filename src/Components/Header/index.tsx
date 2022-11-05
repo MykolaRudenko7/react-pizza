@@ -2,12 +2,13 @@ import React from 'react';
 // redux
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import { basketSelector } from '../redux/slices/basket/selectors';
+import { basketSelector } from '../../redux/slices/basket/selectors';
 //
-import {Search} from './';
+import { Search } from '..';
 //
-import basket from '../assets/img/cart.svg';
-import logoSvg from '../assets/img/pizza-logo.svg';
+import basket from '../../assets/img/cart.svg';
+import logoSvg from '../../assets/img/pizza-logo.svg';
+import styles from '../Header/Header.module.scss';
 //
 //
 //
@@ -28,16 +29,15 @@ export const Header: React.FC = () => {
     isFirstRender.current = true;
   }, [pizzasInBasket]);
 
-
   const totalCount = pizzasInBasket.reduce((sum: number, obj: any) => {
     return obj.count + sum;
   }, 0);
 
   return (
-    <div className="header">
-      <div className="container">
+    <div className={styles.header}>
+      <div className={styles.header__container}>
         <Link to="/">
-          <div className="header__logo">
+          <div className={styles.header__logo}>
             <img width="38" src={logoSvg} alt="Pizza logo" />
             <div>
               <h1>React Pizza</h1>
@@ -47,11 +47,11 @@ export const Header: React.FC = () => {
         </Link>
         {location.pathname !== '/Basket' && <Search />}
         {location.pathname !== '/Basket' && (
-          <div className="header__cart">
+          <div className={styles.header__basketBtn}>
             <Link to="/Basket">
-              <button className="button button--cart">
+              <button className={styles.button_basket}>
                 <span>{totalPrice} грн</span>
-                <div className="button__delimiter"></div>
+                <div className={styles.button_basket__delimiter}></div>
                 <img src={basket} alt="basket" />
                 <span>{totalCount}</span>
               </button>
