@@ -11,11 +11,17 @@
 		font-weight: 600;
 		padding: 7px 15px;
 		border-radius: 5px;
+		@media (max-width: 560px) {
+			font-size: 12px;
+			padding: 7px;
+			margin: 0 5px;
+		}
 
 		&:hover {
 			background-color: #e4e2e2;
 		}
 	}
+
 }
 
 :global {

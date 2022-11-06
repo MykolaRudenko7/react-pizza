@@ -67,7 +67,7 @@ export const BasketItem: React.FC<BasketItemProps> = ({
           +
         </button>
       </div>
-      <div className={styles.basket__item_price}>
+      <div className={styles.basket__price}>
         <b>{count * price} грн</b>
       </div>
       <div className={styles.basket__item_remove}>

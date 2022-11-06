@@ -2,13 +2,15 @@
 @import '../../scss/components/normalize';
 
 .categories {
+	@media (max-width: 660px) {
+		width: 100%;
+		overflow: scroll;
+	}
+
 	ul {
+		overflow: auto;
 		display: flex;
 		column-gap: 9px;
-
-		@media (max-width: 611px) {
-			overflow: scroll;
-		}
 
 		li {
 			background-color: #f9f9f9;
@@ -18,7 +20,8 @@
 			cursor: pointer;
 			transition: background-color 0.1s ease-in-out;
 
-			// @include noselect();
+			@include noselect();
+
 			@media (max-width: 1210px) {
 				padding: 10px 15px;
 			}
