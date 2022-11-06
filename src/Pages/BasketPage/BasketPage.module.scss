@@ -2,20 +2,9 @@
 @import '../../scss/components/normalize';
 
 .basket {
-	padding: 95px;
-	margin: 0 auto;
-
-	@media (max-width: 1025px) {
-		padding: 60px;
-	}
-
-	@media (max-width: 769px) {
-		padding: 25px;
-	}
-
-	@media (max-width: 440px) {
-		padding: 10px;
-	}
+	max-width:820px;
+	// padding: 95px;
+	margin: 30px auto;
 
 	&__top {
 		display: flex;
