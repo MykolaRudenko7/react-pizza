@@ -108,7 +108,8 @@ const MainPage: React.FC = () => {
         <Categories value={categoryIndex} clickOnCategoty={clickOnCategoty} />
         <Sort value={sortType} />
       </div>
-      <h2 className={styles.content__title}>Всі піцци</h2>
+      <h2 className={styles.content__title}>Всі піци
+</h2>
       {status === Status.ERROR ? (
         <div className={styles.content__error}>
           <h2>Відбулась помилка</h2>
